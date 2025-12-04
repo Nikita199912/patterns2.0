@@ -96,7 +96,7 @@ public class AuthTest {
     @Test
     @DisplayName("Ошибка: Валидация при попытке входа с пустым полем логина")
     void shouldShowValidationErrorIfEmptyLogin() {
-        DataGenerator.RegistrationDto registeredUser = DataGenerator.Registration.getRegisteredUser("active"); // Убедитесь, что синтаксис 'status:' удален
+        DataGenerator.RegistrationDto registeredUser = DataGenerator.Registration.getRegisteredUser("active");
         fillLoginForm("", registeredUser.getPassword());
 
         LOGIN_FIELD_ERROR
@@ -105,15 +105,15 @@ public class AuthTest {
     }
 
 
-    // --- НЕГАТИВНЫЙ ТЕСТ: Валидация (пустое поле пароля) ---
+
     @Test
     @DisplayName("Ошибка: Валидация при попытке входа с пустым полем пароля")
     void shouldShowValidationErrorIfEmptyPassword() {
-        DataGenerator.RegistrationDto registeredUser = DataGenerator.Registration.getRegisteredUser("active"); // Убедитесь, что синтаксис 'status:' удален
-        fillLoginForm(registeredUser.getLogin(), ""); // Убедитесь, что синтаксис 'password:' удален
+        DataGenerator.RegistrationDto registeredUser = DataGenerator.Registration.getRegisteredUser("active");
+        fillLoginForm(registeredUser.getLogin(), "");
 
-        PASSWORD_FIELD_ERROR // Теперь проверяем ошибку под полем "Пароль"
+        PASSWORD_FIELD_ERROR
                 .shouldBe(visible, Duration.ofSeconds(18))
-                .shouldHave(Condition.exactText("Поле обязательно для заполнения")); // Точный текст из скриншота
+                .shouldHave(Condition.exactText("Поле обязательно для заполнения"));
     }
 }
