@@ -1,3 +1,4 @@
+
 name: Java CI with Gradle
 
 on: [push, pull_request]
@@ -18,5 +19,7 @@ jobs:
         run: chmod +x gradlew
       - name: Start SUT
         run: java -jar ./artifacts/app-ibank.jar -P:profile=test &
+      - name: Wait for SUT to start
+        run: sleep 15s
       - name: Build with Gradle
-        run: ./gradlew test --info
+        run: ./gradlew test -Dselenide.headless=true
