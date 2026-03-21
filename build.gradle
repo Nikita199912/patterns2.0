@@ -14,18 +14,11 @@ repositories {
 }
 
 dependencies {
-    // JUnit 5
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
-    // Selenide
     testImplementation 'com.codeborne:selenide:6.17.2'
-    // Rest-Assured для работы с API банка
     testImplementation 'io.rest-assured:rest-assured:5.3.1'
-    // Gson для работы с JSON
     testImplementation 'com.google.code.gson:gson:2.10.1'
-    // Faker для генерации данных
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
-
-    // Lombok (Правильное подключение, чтобы @Value работало)
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
     testCompileOnly 'org.projectlombok:lombok:1.18.30'
@@ -34,6 +27,5 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    // Прокидываем headless режим из командной строки в Selenide
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
 }

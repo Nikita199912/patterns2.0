@@ -62,4 +62,19 @@ public class AuthTest {
         $("[data-test-id='error-notification'] .notification__content")
                 .shouldHave(Condition.text("Ошибка! Неверно указан логин или пароль"), Duration.ofSeconds(10));
     }
+    @Test
+    @DisplayName("Should get error message if login with active unregistered user")
+    void shouldGetErrorIfActiveUnregisteredUser() {
+        var activeUnregisteredUser = DataGeneration.Registration.getUser("active");
+
+        $("[data-test-id='login'] input").setValue(activeUnregisteredUser.getLogin());
+        $("[data-test-id='password'] input").setValue(activeUnregisteredUser.getPassword());
+        $("button[data-test-id='action-login']").click();
+
+        // Проверяем, что появляется ошибка "Неверно указан логин или пароль"
+        $("[data-test-id='error-notification'] .notification__content")
+                .shouldHave(Condition.text("Ошибка! Неверно указан логин или пароль"), Duration.ofSeconds(10))
+                .shouldBe(Condition.visible);
+    }
+
 }
